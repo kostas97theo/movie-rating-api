@@ -68,7 +68,6 @@ namespace MovieRatingAPI.Controllers
 			var ratingDto = mapper.Map<RatingDto>(ratingDomain);
 
 			return CreatedAtAction(nameof(GetById), new { id = ratingDto.Id }, ratingDto);
-			
 		}
 
 		[HttpPut]

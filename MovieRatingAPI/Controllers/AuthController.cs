@@ -33,7 +33,6 @@ namespace MovieRatingAPI.Controllers
 
 			if (identityResult.Succeeded)
 			{
-				// Add roles tho this User
 				if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
 				{
 					identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
@@ -43,9 +42,7 @@ namespace MovieRatingAPI.Controllers
 						return Ok("User was registered! Please login.");
 					}
 				}
-				
 			}
-
 			return BadRequest("Something went wrong");
 		}
 
@@ -61,25 +58,20 @@ namespace MovieRatingAPI.Controllers
 
 				if (checkPasswordResult)
 				{
-					// Get Roles for this user
 					var roles = await userManager.GetRolesAsync(user);
 
 					if (roles != null)
 					{
-						// Create Token
-
 						var jwtToken = tokenRepository.CreateJWTToken(user, roles.ToList());
 
 						var response = new LoginResponseDto
 						{
 							JwtToken = jwtToken
 						};
-
 						return Ok(response);
 					}
 				}
 			}
-
 			return BadRequest("Username or password incorrect");
 		}
 	}

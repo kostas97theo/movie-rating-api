@@ -39,18 +39,6 @@ namespace MovieRatingAPI.Controllers
 		{
 			var moviesDomain = await movieRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
 
-			//var moviesDto = new List<MovieDto>();
-			//foreach (var movieDomain in moviesDomain)
-			//{
-			//	moviesDto.Add(new MovieDto()
-			//	{
-			//		Id = movieDomain.Id,
-			//		Title = movieDomain.Title,
-			//		Description = movieDomain.Description,
-			//		CreatedAt = movieDomain.CreatedAt,
-			//		CreatedBy = movieDomain.CreatedBy
-			//	});
-			//}
 			var moviesDto =  mapper.Map<List<MovieDto>>(moviesDomain);
 
 			return Ok(moviesDto);
@@ -68,15 +56,6 @@ namespace MovieRatingAPI.Controllers
 				return NotFound();
 			}
 
-			//var movieDto = new MovieDto
-			//{
-			//	Id=movieDomain.Id,
-			//	Title = movieDomain.Title,
-			//	Description = movieDomain.Description,
-			//	CreatedAt = movieDomain.CreatedAt,
-			//	CreatedBy = movieDomain.CreatedBy
-			//};
-
 			var movieDto = mapper.Map<MovieDto>(movieDomain);
 
 			return Ok(movieDto);
@@ -87,26 +66,9 @@ namespace MovieRatingAPI.Controllers
 		[Authorize(Roles = "Writer")]
 		public async Task<IActionResult> Create([FromBody] AddMovieRequestDto addMovieRequestDto)
 		{
-				//var movieDomain = new Movie
-				//{
-				//	Title = addMovieRequestDto.Title,
-				//	Description = addMovieRequestDto.Description,
-				//	CreatedAt = addMovieRequestDto.CreatedAt,
-				//	CreatedBy = addMovieRequestDto.CreatedBy
-				//};
-
 				var movieDomain = mapper.Map<Movie>(addMovieRequestDto);
 
 				movieDomain = await movieRepository.CreateAsync(movieDomain);
-
-				//var movieDto = new MovieDto
-				//{
-				//	Id = movieDomain.Id,
-				//	Title = movieDomain.Title,
-				//	Description = movieDomain.Description,
-				//	CreatedAt = movieDomain.CreatedAt,
-				//	CreatedBy = movieDomain.CreatedBy
-				//};
 
 				var movieDto = mapper.Map<MovieDto>(movieDomain);
 

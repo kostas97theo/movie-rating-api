@@ -22,7 +22,7 @@ A secure RESTful API built with ASP.NET Core for managing movies and user rating
 - AutoMapper
 - Serilog
 
-## Getting Started
+## Getting Startedg
 1. Clone the repository
 2. Configure connection strings in `appsettings.json`
 3. Run:
